@@ -11,12 +11,12 @@
 }
 
 .MMM-forecast-io .summary {
-  width: 400px;
+  width: 300px;
 }
 
 .MMM-forecast-io .forecast {
   text-align: left;
-  min-width: 400px;
+  min-width: 300px;
   margin-top: 1ex;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .small.MMM-forecast-io .forecast {
-  min-width: 200px;
+  min-width: 100px;
   max-width: 300px;
 }
 
