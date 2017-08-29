@@ -1,0 +1,16 @@
+* move contents to custom.css */
+
+.small {
+  font-size: 15px;
+  line-height: 15px;
+}
+
+.MMM-forecast-io .big-icon{
+  font-size: 40%;
+}
+
+.MMM-forecast-io {
+  width: 300px;
+  font-size: 50%;
+}
+
