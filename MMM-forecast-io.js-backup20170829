@@ -225,15 +225,15 @@ Module.register("MMM-forecast-io", {
   renderPrecipitationGraph: function () {
     var i;
     var width = this.config.precipitationGraphWidth; 
-    var height = Math.round(width * 0.25);            // 75 by default
+    var height = Math.round(width * 0.3);            // 120 by default
     var element = document.createElement('canvas');
     element.className = "precipitation-graph";
     element.width  = width;
     element.height = height;
     var context = element.getContext('2d');
 
-    var precipitationGraphYShift = -15;  // 0..65 range, thus graph -15 to 45 degrees centigrade
-    var stepSize = (width / (24) );    // pixels per hour for 24h
+    var precipitationGraphYShift = -10;  // 0..120 range, thus graph -10 to 110 degrees
+    var stepSize = (width / (24) );    // pixels per hour for 1.5 days
 
 // ======= shade blocks for daylight hours
     var now = new Date();
