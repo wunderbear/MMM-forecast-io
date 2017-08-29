@@ -276,7 +276,7 @@ Module.register("MMM-forecast-io", {
     context.restore();
 
 // ====== freezing and hot lines
-    i = 27;       // ========== hot line, at 80 degrees
+    i = 27;       // ========== hot line, at 27 degrees centigrade
     context.save();
     context.beginPath();
     context.setLineDash([5, 10]);
@@ -286,7 +286,7 @@ Module.register("MMM-forecast-io", {
     context.lineTo(width, height - i + precipitationGraphYShift);
     context.stroke();
 
-    i = 0;         // ====== freezing line
+    i = 0;         // ====== freezing line at zero degrees centigrade
     context.beginPath();
     context.strokeStyle = 'blue';
     context.moveTo(0, height - i + precipitationGraphYShift);
@@ -318,7 +318,7 @@ Module.register("MMM-forecast-io", {
 
 
 // ========= graph of temp
-    var numMins = 60 * 24;     // minutes in graph, 1.5 days
+    var numMins = 60 * 24;     // minutes in graph, 1 day
     var tempTemp;
 
     context.save();
