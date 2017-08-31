@@ -7,11 +7,11 @@ Unfortunately, Geolocation will currently not work with MagicMirror's Electron-b
 https://github.com/electron/electron/issues/6648
 If you are using MagicMirror headless with your own browser this shouldn't be a problem.
 
-Note also that the graph is based on degrees fahrenheit.  If you use another unit, you will probably have to adjust the code for proper vertical scaling.
+# JinjiroSan changes
 
-This module uses white icons by default.  If you prefer color coded icons, merge the contents of the "Color-icons.md" file into your "css\custom.css" file. 
+Adapted the module to Celcius and changed scaling to fit so the hot/cold lines, vertical scaling of the graph. Also adapted the css for better horizontal fit e.g. the days forecast are now neatly outlined again under the graph.
 
-![screenshot](screenshot.png)
+![screenshot](forecast-jinjirosan-24h.png)
 
 ## Using the module
 
