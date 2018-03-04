@@ -188,10 +188,10 @@ Module.register("MMM-forecast-io", {
       var now        = new Date();
 
       if (today.sunriseTime*1000 < now && today.sunsetTime*1000 > now) {
-      	var sunset = new moment.unix(today.sunsetTime).format( "h:mm a" );
+      	var sunset = new moment.unix(today.sunsetTime).format( "LT" );
    	    sunString = '<span class="wi wi-sunset xdimmed"></span> '  + sunset;
       } else {
-    	var sunrise = new moment.unix(today.sunriseTime).format( "h:mm a" );
+    	var sunrise = new moment.unix(today.sunriseTime).format( "LT" );
     	sunString = '<span class="wi wi-sunrise xdimmed"></span> ' + sunrise;
       }
 
