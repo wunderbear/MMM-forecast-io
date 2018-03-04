@@ -10,6 +10,10 @@ If you are using MagicMirror headless with your own browser this shouldn't be a 
 # Wunderbear's changes
 
 Building on the awesome work of dmcinnes, flatpepsi, JinjiroSan. 
+* Sunrise/sunset shown in local time format
+* Temperature graph more visible in red
+* Added labels for hours in graph
+* Removed horizontal freezing and hot lines
 
 ![screenshot](screenshot.png)
 

@@ -147,7 +147,7 @@ Module.register("MMM-forecast-io", {
     var minutely       = this.weatherData.minutely;
     var daily          = this.weatherData.daily;
 
-//========== Current large icon & Temp
+    //========== Current large icon & Temp
     var large = document.createElement("div");
     large.className = "large light";
 
@@ -162,7 +162,7 @@ Module.register("MMM-forecast-io", {
     temperature.innerHTML = " " + this.temp + "&deg;";
     large.appendChild(temperature);
 
-// ====== wind 
+    // ====== wind 
     if (this.config.showWind) {
       var padding = document.createElement("span");
       padding.className = "dim";
@@ -179,7 +179,7 @@ Module.register("MMM-forecast-io", {
       large.appendChild(wind);
     }
 
-//========== sunrise/sunset
+    //========== sunrise/sunset
     if (this.config.showSunrise) {
       var midText = document.createElement("div");
       midText.className = "light";
@@ -202,7 +202,7 @@ Module.register("MMM-forecast-io", {
     }
     wrapper.appendChild(large);
 
-// =========  summary text
+    // =========  summary text
     if (this.config.showSummary) {
       var summaryText = minutely ? minutely.summary : hourly.summary;
       var summary = document.createElement("div");
@@ -211,10 +211,12 @@ Module.register("MMM-forecast-io", {
       wrapper.appendChild(summary);
     }
 
-// ======== precip graph and forecast table
+    // ======== precip graph
     if (this.config.showPrecipitationGraph) {
       wrapper.appendChild(this.renderPrecipitationGraph());
     }
+
+    // ======== forecast table 
     if (this.config.showForecast) {
       wrapper.appendChild(this.renderWeatherForecast());
     }
@@ -235,7 +237,7 @@ Module.register("MMM-forecast-io", {
     var precipitationGraphYShift = -15;  // 0..65 range, thus graph -15 to 45 degrees centigrade
     var stepSize = (width / (24) );    // pixels per hour for 24h
 
-// ======= shade blocks for daylight hours
+    // ======= shade blocks for daylight hours
     var now = new Date();
     now = Math.floor(now / 1000);    // current time in Unix format
     var timeUnilSunrise;
@@ -243,7 +245,6 @@ Module.register("MMM-forecast-io", {
     var sunrisePixels;    // daytime shade box location on graph
     var sunsetPixels;
 
-    context.save();
     for (i = 0; i < 3; i++) {                // 3 days ([0]..[2])
       timeUnilSunrise = (this.weatherData.daily.data[i].sunriseTime - now);
       timeUnilSunset  = (this.weatherData.daily.data[i].sunsetTime - now);
@@ -261,46 +262,22 @@ Module.register("MMM-forecast-io", {
       context.fillStyle = "#323232";
       context.fillRect(sunrisePixels, 0, (sunsetPixels-sunrisePixels), height);
     }
-    context.restore();
 
-// ===== 6hr tick lines
+    // ===== 6hr tick lines
     var tickCount = Math.round(width / (stepSize*6));
-    context.save();
     context.strokeStyle = 'gray';
     context.lineWidth = 2;
-    for (i = 1; i < tickCount; i++) {             
+    for (i = 1; i < tickCount; i++) {
       context.moveTo(i * (stepSize*6), height);
       context.lineTo(i * (stepSize*6), height - 7);
       context.stroke();
     }
-    context.restore();
 
-// ====== freezing and hot lines
-    i = 27;       // ========== hot line, at 27 degrees centigrade
-    context.save();
-    context.beginPath();
-    context.setLineDash([5, 10]);
-    context.lineWidth = 1;
-    context.strokeStyle = 'red';
-    context.moveTo(0, height - i + precipitationGraphYShift);
-    context.lineTo(width, height - i + precipitationGraphYShift);
-    context.stroke();
-
-    i = 0;         // ====== freezing line at zero degrees centigrade
-    context.beginPath();
-    context.strokeStyle = 'blue';
-    context.moveTo(0, height - i + precipitationGraphYShift);
-    context.lineTo(width, height - i + precipitationGraphYShift);
-    context.stroke();
-    context.restore();
-
-// ====== graph of precipIntensity  (inches of liquid water per hour)
+    // ====== graph of precipIntensity  (inches of liquid water per hour)
     var data = this.weatherData.hourly.data;
 
-    context.save();
     context.strokeStyle = 'blue';
     context.fillStyle = 'blue';
-//    context.globalCompositeOperation = 'xor';
     context.beginPath();
     context.moveTo(0, height);
     var intensity;
@@ -314,16 +291,14 @@ Module.register("MMM-forecast-io", {
     context.lineTo(width, height);
     context.closePath();
     context.fill();
-    context.restore();
 
-
-// ========= graph of temp
+    // ========= graph of temp
     var numMins = 60 * 24;     // minutes in graph, 1 day
     var tempTemp;
 
-    context.save();
-    context.strokeStyle = 'gray';
+    context.strokeStyle = 'red';
     context.lineWidth = 2;
+    context.beginPath();
     context.moveTo(0, height);
 
     var stepSizeTemp = Math.round(width / (24));
@@ -334,15 +309,13 @@ Module.register("MMM-forecast-io", {
       tempX = i * stepSizeTemp;
       tempY = height - (this.weatherData.hourly.data[i].temperature + 10);
 
-      context.lineTo( tempX, tempY );       // line from last hour to this hour
+      context.lineTo(tempX, tempY);       // line from last hour to this hour
       context.stroke();
 
       context.beginPath();
-      context.arc(tempX, tempY, 1 ,0,2*Math.PI);          // hour-dots
+      context.arc(tempX, tempY, 1, 0 ,2*Math.PI);          // hour-dots
       context.stroke();
     }
-    context.restore();
-
 
     var timeLabel;
     for (i = 0; i < (24+1); i++) {     // text label for temperature on graph
@@ -352,21 +325,19 @@ Module.register("MMM-forecast-io", {
         tempTemp = Math.round( this.weatherData.hourly.data[i].temperature );
 
         context.beginPath();
-        context.font = "10px Arial";
-        context.fillStyle = "grey";
+        context.font = "12px Arial";
+        context.fillStyle = "white";
         context.fillText( tempTemp, tempX, tempY );
         context.stroke();
 
 
-//        timeLabel = this.weatherData.hourly.data[i].time;
-//        timeLabel = moment(timeLabel*1000).format("ha");
-//        timeLabel = timeLabel.replace("m", " ");
-//        context.beginPath();
-//        context.font = "10px Arial";
-//        context.fillStyle = "grey";
-//        context.fillText( timeLabel , tempX, 10 );
-//        context.stroke();
-
+        timeLabel = this.weatherData.hourly.data[i].time;
+        timeLabel = moment(timeLabel*1000).format("HH");
+        context.beginPath();
+        context.font = "12px Arial";
+        context.fillStyle = "white";
+        context.fillText( timeLabel , tempX, 10 );
+        context.stroke();
       }
     }
 
