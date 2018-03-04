@@ -7,11 +7,11 @@ Unfortunately, Geolocation will currently not work with MagicMirror's Electron-b
 https://github.com/electron/electron/issues/6648
 If you are using MagicMirror headless with your own browser this shouldn't be a problem.
 
-# JinjiroSan changes
+# Wunderbear's changes
 
-Building on the awesome work of dmcinnes and flatpepsi. Adapted the module to Celcius and changed scaling to fit so the hot/cold lines, vertical scaling of the graph and changed the graph to 24h forecast. Also adapted the css for better horizontal fit e.g. the days forecast are now neatly outlined again under the graph.
+Building on the awesome work of dmcinnes, flatpepsi, JinjiroSan. 
 
-![screenshot](forecast-jinjirosan-24h.png)
+![screenshot](screenshot.png)
 
 ## Using the module
 
